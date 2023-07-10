@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DCBL</title>
+	<link rel="stylesheet" href="style.css">
+
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<script>
+function SubForm (){
+    $.ajax({
+        url:'https://api.apispreadsheets.com/data/DhJaprRrCJeZLgS9/',
+        type:'post',
+        data:$("#myForm").serializeArray(),
+        success: function(){
+          alert("Form Data Submitted :)")
+        },
+        error: function(){
+          alert("There was an error :(")
+        }
+    });
+}
+</script>
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="title">
+      Registro DCBL
+    </div>
+    <form id="myForm">
+    <div class="form">
+      <div class="inputfield">
+          <label>Turno</label>
+          <div class="custom_select">
+            <select name="Turno">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+       </div>
+       <div class="inputfield">
+        <label>Hora</label>
+        <div class="custom_select">
+          <select name="Hora">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+          </select>
+        </div>
+     </div> 
+     <div class="inputfield">
+        <label>Motivo de afectación</label>
+        <div class="custom_select">
+          <select name="Motivo">
+            <option value="Revoltura">Revoltura de envase</option>
+            <option value="Roto">Envase roto</option>
+            <option value="Tarima">Tarima dañada</option>
+            <option value="Empaque">Empaque dañado</option>
+          </select>
+        </div>
+     </div> 
+     <div class="inputfield">
+        <label>Tiempo de afectación (Min)</label>
+        <input type="number" class="input" name="Duracion">
+     </div> 
+      <div class="inputfield">
+          <label>Observaciones</label>
+          <textarea class="textarea" name="Observaciones"></textarea>
+       </div>   
+      <div class="inputfield">
+          <label>SAP envasado</label>
+          <input type="text" class="input" name="Sap envasado">
+       </div> 
+       <div class="inputfield">
+        <label>SAP logistica</label>
+        <input type="text" class="input" name="Sap logistica">
+     </div> 
+     <div class="inputfield">
+        <label>Ingresar evidencia de afectación</label>
+        <input type="file" class="input" name="Evidencia">
+     </div>
+      <div class="inputfield terms">
+          <label class="check">
+            <input type="checkbox" name="Validez">
+            <span class="checkmark"></span>
+          </label>
+          <p>Doy validez de que los datos en este forms son reales</p>
+       </div> 
+      <div class="inputfield">
+      </div>
+    </div>
+</form>
+        <button onclick="SubForm()">Submit</button>
+</div>	
+	
+</body>
+</html>
