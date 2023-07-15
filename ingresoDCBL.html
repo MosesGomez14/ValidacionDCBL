@@ -5,34 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>DCBL</title>
 	<link rel="stylesheet" href="style.css">
-
-    <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
-<script>
-function SubForm (){
-    $.ajax({
-        url:'https://api.apispreadsheets.com/data/DhJaprRrCJeZLgS9/',
-        type:'post',
-        data:$("#myForm").serializeArray(),
-        success: function(){
-          alert("Form Data Submitted :)")
-        },
-        error: function(){
-          alert("There was an error :(")
-        }
-    });
-}
-</script>
 </head>
 <body>
-
 <div class="wrapper">
     <div class="title">
       Registro DCBL
     </div>
-    <form id="myForm">
+    <form id="myForm" method="POST" 
+      action="https://script.google.com/macros/s/AKfycbyLZRlW30ff-CnvPuGkIqhGC7shpI--h4Qd3nT3gEgsCQjJ1Sib-A3Ejz7HTTE_h6fJ/exec">
     <div class="form">
       <div class="inputfield">
           <label>Turno</label>
@@ -72,39 +52,49 @@ function SubForm (){
      </div> 
      <div class="inputfield">
         <label>Tiempo de afectación (Min)</label>
-        <input type="number" class="input" name="Duracion">
+        <input type="number" class="input" name="Duracion" required>
      </div> 
       <div class="inputfield">
           <label>Observaciones</label>
-          <textarea class="textarea" name="Observaciones"></textarea>
+          <textarea class="textarea" name="Observaciones" required></textarea>
        </div>   
       <div class="inputfield">
           <label>SAP envasado</label>
-          <input type="text" class="input" name="Sap envasado">
+          <input type="text" class="input" name="Sap envasado" required>
        </div> 
        <div class="inputfield">
         <label>SAP logistica</label>
-        <input type="text" class="input" name="Sap logistica">
+        <input type="text" class="input" name="Sap logistica" required>
      </div> 
      <div class="inputfield">
         <label>Ingresar evidencia de afectación</label>
-        <input type="file" class="input" name="Evidencia">
+        <input type="file" class="input" name="Evidencia" required>
      </div>
       <div class="inputfield terms">
           <label class="check">
-            <input type="checkbox" name="Validez">
+            <input type="checkbox" name="Validez" required>
             <span class="checkmark"></span>
           </label>
           <p>Doy validez de que los datos en este forms son reales</p>
        </div> 
       <div class="inputfield">
       </div>
+      <div class="inputfield">
+        <input type="submit" value="Enviar datos" class="btn">
+      </div>
     </div>
 </form>
-<div class="btn">
-  <button onclick="SubForm()">Submit</button>
-</div>
 </div>	
-	
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbyLZRlW30ff-CnvPuGkIqhGC7shpI--h4Qd3nT3gEgsCQjJ1Sib-A3Ejz7HTTE_h6fJ/exec'
+  const form = document.forms['myForm']
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
 </body>
 </html>
